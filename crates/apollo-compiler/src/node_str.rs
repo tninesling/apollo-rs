@@ -65,6 +65,17 @@ impl NodeStr {
             Self::Static(static_str) => *static_str,
         }
     }
+
+    pub fn map<T>(
+        &self,
+        map_heap: impl FnOnce(Arc<str>, &Option<NodeLocation>) -> T,
+        map_static: impl FnOnce(&str) -> T,
+    ) -> T {
+        match self {
+            Self::Heap(arc_str, loc) => map_heap(arc_str.clone(), loc),
+            Self::Static(s) => map_static(*s),
+        }
+    }
 }
 impl std::hash::Hash for NodeStr {
     #[inline]

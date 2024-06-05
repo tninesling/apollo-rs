@@ -60,7 +60,7 @@ const _: () = {
 
 /// A GraphQL identifier
 #[derive(Clone, Ord, Eq, PartialOrd, PartialEq, Hash)]
-pub struct Name(NodeStr);
+pub struct Name(pub NodeStr);
 
 /// Refers to the name of a GraphQL type defined elsewhere
 pub type NamedType = Name;
